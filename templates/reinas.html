@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>El ejercicio de las 4 reinas</h1>
+<table>
+    {% for dato in olvidado %}
+    <tr>
+        {% for j in range(4) %}
+        {% if dato == j + 1 %}
+        <td>👑</td>
+        {% else %}
+        <td>+</td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

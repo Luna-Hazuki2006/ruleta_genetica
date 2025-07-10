@@ -5,3 +5,10 @@ summary:hover, button {
 fieldset {
     border-radius: 5px;
 }
+
+p span {
+    border: 1px dashed black;
+    background-color: darkgoldenrod;
+    padding: 1%;
+    border-radius: 10px;
+}

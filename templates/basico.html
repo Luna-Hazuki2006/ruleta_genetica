@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>¡Crea tus propias generaciones con el algoritmo genético!</h1>
+<form action="/" method="post">
+    <fieldset>
+        <legend>¡Llena tus datos!</legend>
+        <label for="inicio">Inicio del rango: </label>
+        <input type="number" name="inicio" id="inicio" step="1" required><br>
+        <label for="final">Fin del rango: </label>
+        <input type="number" name="final" id="final" step="1" required><br>
+        <label for="veces">Tamaño del vector de población: </label>
+        <input type="number" name="veces" id="veces" min="1" step="1" max="100" required><br>
+        <label for="generaciones">Cantidad de generaciones: </label>
+        <input type="number" name="generaciones" id="generaciones" min="1" step="1" max="1000" required><br>
+        <button type="submit">¡Generar!</button>
+    </fieldset>
+</form>
+{% block respuesta %}{% endblock %}
+{% endblock %}
