@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>¡Generaciones!</h1>
+{% for datos in lista %}
+<details>
+    <summary>Generación: {{ loop.index0 }}</summary>
+    <ol>
+        {% for i in range(datos['vector'].__len__()) %}
+        <li>Valor: {{ datos['vector'][i] }}, Fitness: {{ datos['fitness'][i] | round(4) }}</li>
+        {% endfor %}
+    </ol>
+</details>
+{% endfor %}
+{% endblock %}
