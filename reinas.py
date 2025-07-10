@@ -16,6 +16,13 @@ def colisiones(lista : list[list[int]]):
         colisiones.append(veces)
     return colisiones
 
+def llenar(cuerpo : dict): 
+    cuerpo['fitness'] = colisiones(cuerpo['vector'])
+    cuerpo['∑fitness'] = sum(cuerpo['fitness'])
+    cuerpo['probabilidades'] = [esto / cuerpo['∑fitness'] for esto in cuerpo['fitness']]
+    cuerpo['probabilidadesAcumuladas'] = [sum(cuerpo['probabilidades'][: i + 1]) for i, _ in enumerate(cuerpo['probabilidades'])]
+    return cuerpo
+
 def coronar(cantidad : int = 4): 
     tablero = []
     if cantidad < 4: 
@@ -27,10 +34,7 @@ def coronar(cantidad : int = 4):
         random.shuffle(olvidado)
         pedazos.append(olvidado)
     cuerpo = {'vector': pedazos}
-    cuerpo['fitness'] = colisiones(pedazos)
-    cuerpo['∑fitness'] = sum(cuerpo['fitness'])
-    cuerpo['probabilidades'] = [esto / cuerpo['∑fitness'] for esto in cuerpo['fitness']]
-    cuerpo['probabilidadesAcumuladas'] = [sum(cuerpo['probabilidades'][: i + 1]) for i, _ in enumerate(cuerpo['probabilidades'])]
+    cuerpo = llenar(cuerpo)
     tablero.append(cuerpo)
     pprint(cuerpo)
     return tablero

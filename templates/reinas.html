@@ -2,6 +2,7 @@
 {% block content %}
 <h1>El ejercicio de las 4 reinas</h1>
 {% for pedazos in tableros %}
+<h2>Generación: {{ loop.index0 }}</h2>
 <section>
     {% for i in range(pedazos['vector'].__len__()) %}
     <table>
