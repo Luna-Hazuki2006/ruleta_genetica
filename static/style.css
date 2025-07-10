@@ -16,3 +16,12 @@ p span {
 td {
     text-align: center;
 }
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td, tr, table {
+    border: 1px solid black;
+}
