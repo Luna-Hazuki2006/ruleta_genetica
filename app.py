@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Annotated
 from basico import genetico
+from reinas import coronar
 
 app = FastAPI()
 
@@ -35,8 +36,7 @@ def mostrar(request : Request, datos : Annotated[Datos_Iniciales, Form()]):
 
 @app.get('/reinas')
 def realeza(request : Request):
-    olvidado = [1, 2, 3, 4]
-    random.shuffle(olvidado)
+    tableros = coronar()
     return templates.TemplateResponse(request, 'reinas.html', {
-        'olvidado': olvidado
+        'tableros': tableros
     })

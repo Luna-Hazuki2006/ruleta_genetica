@@ -25,3 +25,7 @@ table {
 td, tr, table {
     border: 1px solid black;
 }
+
+section {
+    display: flex;
+}
