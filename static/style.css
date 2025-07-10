@@ -1,0 +1,7 @@
+summary:hover, button {
+    cursor: pointer;
+}
+
+fieldset {
+    border-radius: 5px;
+}
