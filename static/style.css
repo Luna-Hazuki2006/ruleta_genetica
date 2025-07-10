@@ -12,3 +12,7 @@ p span {
     padding: 1%;
     border-radius: 10px;
 }
+
+td {
+    text-align: center;
+}
