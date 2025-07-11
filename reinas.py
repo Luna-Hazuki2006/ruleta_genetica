@@ -80,7 +80,7 @@ def coronar(cantidad : int = 4):
         vectores = []
         acumulado.extend(tablero[-1]['probabilidadesAcumuladas'])
         vectores.extend(tablero[-1]['vector'])
-        for __ in range(6): 
+        for _ in range(6): 
             decision = random.random()
             if decision > 0.1: 
                 a = 0
