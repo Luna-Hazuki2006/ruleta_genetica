@@ -1,9 +1,8 @@
 import random
 from pprint import pprint
-tablero = []
 
 def colisiones(lista : list[list[int]]): 
-    colisiones = []
+    encuentros = []
     for unico in lista: 
         veces = 0
         for i, cada in enumerate(unico): 
@@ -13,8 +12,8 @@ def colisiones(lista : list[list[int]]):
                 if sumas == unico[j] or restas == unico[j]: veces += 2
                 sumas += 1
                 restas -= 1
-        colisiones.append(veces)
-    return colisiones
+        encuentros.append(veces)
+    return encuentros
 
 def llenar(cuerpo : dict): 
     cuerpo['colisiones'] = colisiones(cuerpo['vector'])
