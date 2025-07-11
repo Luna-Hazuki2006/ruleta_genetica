@@ -43,7 +43,23 @@ def mutar(vector : list[int]):
     return vector
 
 def cruzar(primero : list[int], segundo : list[int]):
-    pass
+    penultimo = []
+    ultimo = []
+    for cada, uno in zip(primero, segundo): 
+        if (len(penultimo) != len(primero) and
+            cada not in penultimo): 
+            penultimo.append(cada)
+        if (len(penultimo) != len(primero) and
+            uno not in penultimo): 
+            penultimo.append(uno)
+        if (len(ultimo) != len(segundo) and
+            uno not in ultimo): 
+            ultimo.append(uno)
+        if (len(ultimo) != len(segundo) and
+            cada not in ultimo): 
+            ultimo.append(cada)
+        if len(penultimo) == len(primero) and len(ultimo) == len(segundo): break
+    return penultimo, ultimo
 
 def coronar(cantidad : int = 4): 
     tablero = []
@@ -58,26 +74,26 @@ def coronar(cantidad : int = 4):
     cuerpo = {'vector': pedazos}
     cuerpo = llenar(cuerpo)
     tablero.append(cuerpo)
-    for _ in range(6): 
+    for _ in range(10): 
         cuerpo = {'vector': []}
         acumulado = []
         vectores = []
         acumulado.extend(tablero[-1]['probabilidadesAcumuladas'])
         vectores.extend(tablero[-1]['vector'])
         for __ in range(6): 
-            # decision = random.random()
-            # if decision > 0.1: 
-            #     a = 0
-            #     b = 0
-            #     while a == b: 
-            #         a = seleccionar(acumulado)
-            #         b = seleccionar(acumulado)
-            #     primer, segundo = cruzar(vectores[a], vectores[b])
-            #     if len(cuerpo['vector']) == 6: break
-            #     cuerpo['vector'].append(primer)
-            #     if len(cuerpo['vector']) == 6: break
-            #     cuerpo['vector'].append(segundo)
-            # else: 
+            decision = random.random()
+            if decision > 0.1: 
+                a = 0
+                b = 0
+                while a == b: 
+                    a = seleccionar(acumulado)
+                    b = seleccionar(acumulado)
+                primer, segundo = cruzar(vectores[a], vectores[b])
+                if len(cuerpo['vector']) == 6: break
+                cuerpo['vector'].append(primer)
+                if len(cuerpo['vector']) == 6: break
+                cuerpo['vector'].append(segundo)
+            else: 
                 i = seleccionar(acumulado)
                 dato = mutar(vectores[i])
                 if len(cuerpo['vector']) == 6: break
@@ -85,5 +101,5 @@ def coronar(cantidad : int = 4):
                 if len(cuerpo['vector']) == 6: break
         cuerpo = llenar(cuerpo)
         tablero.append(cuerpo)
-    pprint(cuerpo)
+    # pprint(tablero)
     return tablero
