@@ -29,3 +29,8 @@ td, tr, table {
 section {
     display: flex;
 }
+
+tr:nth-child(odd) td:nth-child(odd), tr:nth-child(even) td:nth-child(even) {
+    background-color: black;
+    color: white;
+}

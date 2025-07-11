@@ -6,10 +6,10 @@
 <section>
     {% for i in range(pedazos['vector'].__len__()) %}
     <table>
-        <caption>Colisiones: {{ pedazos['fitness'][i] }}</caption>
+        <caption>Colisiones: {{ pedazos['colisiones'][i] }}</caption>
         {% for dato in pedazos['vector'][i] %}
         <tr>
-            {% for j in range(4) %}
+            {% for j in range(pedazos['vector'][i].__len__()) %}
             {% if dato == j %}
             <td>👑</td>
             {% else %}

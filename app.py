@@ -36,7 +36,7 @@ def mostrar(request : Request, datos : Annotated[Datos_Iniciales, Form()]):
 
 @app.get('/reinas')
 def realeza(request : Request):
-    tableros = coronar()
+    tableros = coronar(4)
     return templates.TemplateResponse(request, 'reinas.html', {
         'tableros': tableros
     })
