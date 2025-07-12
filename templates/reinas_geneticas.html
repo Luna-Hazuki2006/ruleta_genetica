@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>El ejercicio de las 4 reinas</h1>
+{% for pedazos in tableros %}
+<h2>Generación: {{ loop.index0 }}</h2>
+<section>
+    {% for cada, choque in zip(pedazos['vector'], pedazos['colisiones']) %}
+    <table>
+        <caption>Colisiones: {{ choque }}</caption>
+        {% for j in range(cantidad) %}
+        <tr>
+            {% for dato in cada %}
+            {% if dato == j %}
+            <td>👑</td>
+            {% else %}
+            <td>+</td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% endfor %}
+</section>
+{% endfor %}
+<script defer>
+    function revisar(lista) {
+        for (let i = 0; i < lista.length; i++) {
+            const element = lista[i];
+            console.log(`Generación ${i}`);
+            
+            console.log(element);
+            
+        }
+    }
+    revisar({{ tableros | tojson }})
+</script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block content %}
+{% for dato in tableros %}
+<table>
+    <caption>Colisiones: {{ dato['colisiones'] }}</caption>
+    {% for j in range(cantidad) %}
+    <tr>
+        {% for cada in dato['tabla'] %}
+        {% if cada == j %}
+        <td>👑</td>
+        {% else %}
+        <td>+</td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% endfor %}
+{% endblock %}

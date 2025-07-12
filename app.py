@@ -8,7 +8,8 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Annotated
 from basico import genetico
-from reinas import coronar
+from reinas_geneticas import coronar
+from reinas_tabu import combinar
 
 app = FastAPI()
 
@@ -36,7 +37,16 @@ def mostrar(request : Request, datos : Annotated[Datos_Iniciales, Form()]):
 
 @app.get('/reinas')
 def realeza(request : Request):
-    tableros = coronar(4)
-    return templates.TemplateResponse(request, 'reinas.html', {
-        'tableros': tableros
+    cantidad = 4
+    tableros = coronar(cantidad)
+    return templates.TemplateResponse(request, 'reinas_geneticas.html', {
+        'tableros': tableros, 'zip': zip, 'cantidad': cantidad
+    })
+
+@app.get('/tabu')
+def tabues_reales(request : Request): 
+    cantidad = 4
+    tableros = combinar(cantidad)
+    return templates.TemplateResponse(request, 'reinas_tabu.html', {
+        'tableros': tableros, 'cantidad': cantidad
     })

@@ -6,10 +6,17 @@ def colisiones(lista : list[list[int]]):
     for unico in lista: 
         veces = 0
         for i, cada in enumerate(unico): 
+            positivo = True
+            negativo = True
             sumas = cada + 1
             restas = cada - 1
             for j in range(i + 1, len(unico)): 
-                if sumas == unico[j] or restas == unico[j]: veces += 2
+                if sumas == unico[j] and positivo: 
+                    veces += 2
+                    positivo = False
+                if restas == unico[j] and negativo: 
+                    veces += 2
+                    negativo = False
                 sumas += 1
                 restas -= 1
         encuentros.append(veces)
@@ -79,7 +86,7 @@ def coronar(cantidad : int = 4):
         vectores = []
         acumulado.extend(tablero[-1]['probabilidadesAcumuladas'])
         vectores.extend(tablero[-1]['vector'])
-        for _ in range(6): 
+        for __ in range(6): 
             decision = random.random()
             if decision > 0.1: 
                 a = 0
