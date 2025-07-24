@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static', path='explicacion.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
-    <title>Algoritmos genéticos</title>
+    <script src="{{ url_for('static', path='index.js') }}" defer></script>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <nav>
-        <p>
-            <span><a href="/">Ejemplo básico</a></span>
-            <span><a href="/reinas">4 reinas geneticas</a></span>
-            <span><a href="/tabu">4 reinas tabú</a></span>
-        </p>
+        <!-- <p> -->
+            <div><a href="/">Ejemplo básico</a></div>
+            <div><a href="/reinas_geneticas">n reinas genéticas</a></div>
+            <div><a href="/reinas_tabu">n reinas tabú</a></div>
+            <div><a href="/reinas_recocidas">n reinas recocidas simuladas</a></div>
+            <div><a href="/viajero_tabu">Viajero tabú</a></div>
+            <div><a href="/viajero_recocido">Viajero recocido</a></div>
+            <div><a href="/busqueda_local">Búsqueda local</a></div>
+        <!-- </p> -->
     </nav>
     <main>
         {% block content %}{% endblock %}

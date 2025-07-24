@@ -1,30 +1,34 @@
 import random
 from pprint import pprint
+from colisiones import colisiones
+import math
 
-def colisiones(lista : list[list[int]]): 
-    encuentros = []
-    for unico in lista: 
-        veces = 0
-        for i, cada in enumerate(unico): 
-            positivo = True
-            negativo = True
-            sumas = cada + 1
-            restas = cada - 1
-            for j in range(i + 1, len(unico)): 
-                if sumas == unico[j] and positivo: 
-                    veces += 2
-                    positivo = False
-                if restas == unico[j] and negativo: 
-                    veces += 2
-                    negativo = False
-                sumas += 1
-                restas -= 1
-        encuentros.append(veces)
-    return encuentros
+# def colisiones(lista : list[list[int]]): 
+#     encuentros = []
+#     for unico in lista: 
+#         veces = 0
+#         for i, cada in enumerate(unico): 
+#             positivo = True
+#             negativo = True
+#             sumas = cada + 1
+#             restas = cada - 1
+#             for j in range(i + 1, len(unico)): 
+#                 if sumas == unico[j] and positivo: 
+#                     veces += 2
+#                     positivo = False
+#                 if restas == unico[j] and negativo: 
+#                     veces += 2
+#                     negativo = False
+#                 sumas += 1
+#                 restas -= 1
+#         encuentros.append(veces)
+#     return encuentros
 
 def llenar(cuerpo : dict): 
-    cuerpo['colisiones'] = colisiones(cuerpo['vector'])
     total = len(cuerpo['vector'][0])
+    cuerpo['colisiones'] = []
+    for cada in cuerpo['vector']: 
+        cuerpo['colisiones'].append(colisiones(cada, total))
     real = total * (total - 1)
     cuerpo['fitness'] = [(real - esto) + 0.1 for esto in cuerpo['colisiones']]
     cuerpo['∑fitness'] = sum(cuerpo['fitness'])
@@ -68,25 +72,27 @@ def cruzar(primero : list[int], segundo : list[int]):
     return penultimo, ultimo
 
 def coronar(cantidad : int = 4): 
+    generaciones = random.randrange(1000, 3000)
+    poblaciones = math.factorial(cantidad)
     tablero = []
     if cantidad < 4: 
         print('Debe haber al menos 4 reinas')
         return tablero
     pedazos = []
-    for _ in range(6): 
+    for _ in range(poblaciones): 
         olvidado = list(range(cantidad))
         random.shuffle(olvidado)
         pedazos.append(olvidado)
-    cuerpo = {'vector': pedazos}
-    cuerpo = llenar(cuerpo)
-    tablero.append(cuerpo)
-    for _ in range(10): 
+    unidad = {'vector': pedazos}
+    cuerpo_inicial = llenar(unidad)
+    tablero.append(cuerpo_inicial)
+    for _ in range(generaciones): 
         cuerpo = {'vector': []}
         acumulado = []
         vectores = []
         acumulado.extend(tablero[-1]['probabilidadesAcumuladas'])
         vectores.extend(tablero[-1]['vector'])
-        for __ in range(6): 
+        for __ in range(poblaciones): 
             decision = random.random()
             if decision > 0.1: 
                 a = 0
@@ -95,17 +101,18 @@ def coronar(cantidad : int = 4):
                     a = seleccionar(acumulado)
                     b = seleccionar(acumulado)
                 primer, segundo = cruzar(vectores[a], vectores[b])
-                if len(cuerpo['vector']) == 6: break
+                if len(cuerpo['vector']) == poblaciones: break
                 cuerpo['vector'].append(primer)
-                if len(cuerpo['vector']) == 6: break
+                if len(cuerpo['vector']) == poblaciones: break
                 cuerpo['vector'].append(segundo)
             else: 
                 i = seleccionar(acumulado)
                 dato = mutar(vectores[i])
-                if len(cuerpo['vector']) == 6: break
+                if len(cuerpo['vector']) == poblaciones: break
                 cuerpo['vector'].append(dato)
-                if len(cuerpo['vector']) == 6: break
-        cuerpo = llenar(cuerpo)
-        tablero.append(cuerpo)
+                if len(cuerpo['vector']) == poblaciones: break
+        cuerpo_final = llenar(cuerpo)
+        pprint(cuerpo_final)
+        tablero.append(cuerpo_final)
     # pprint(tablero)
     return tablero

@@ -1,15 +1,15 @@
 {% extends 'index.html' %}
-{% block title %}n reinas con búsqueda tabú{% endblock %}
+{% block title %}n reinas con recocido simulado{% endblock %}
 {% block content %}
-<h1>{{ cantidad }} reinas con búsqueda tabú</h1>
-<form action="/reinas_tabu" method="get">
+<h1>{{ cantidad }} reinas con recocido simulado</h1>
+<form action="/reinas_recocidas" method="get">
     <fieldset>
         <legend>¡Elige la cantidad de reinas!</legend>
         <label for="n">N reinas: </label>
-        <input type="number" name="n" id="n" min="4" max="10" step="1" value="{{ cantidad }}" required>
+        <input type="number" name="n" id="n" min="4" step="1" value="{{ cantidad }}" required>
         <p class="importante">
-            A mayor cantidad de reinas MÁS LENTO SERÁ, (NO ES EXAGERACIÓN) <br>
-            INTERNAMENTE SE ESTÁN EJECUTANDO MILES DE ITERACIONES Y CÁLCULOS
+            Este método es bastante rápido en comparación a los demás <br>
+            Pero puede que sea menos efectivo
         </p>
         <button type="submit">Buscarlas genéticamente</button>
     </fieldset>
@@ -20,7 +20,7 @@
         <caption>Colisiones: {{ dato['colisiones'] }}</caption>
         {% for j in range(cantidad) %}
         <tr>
-            {% for cada in dato['tabla'] %}
+            {% for cada in dato['tablero'] %}
             {% if cada == j %}
             <td>👑</td>
             {% else %}

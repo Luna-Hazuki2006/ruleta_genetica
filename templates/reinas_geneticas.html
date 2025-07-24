@@ -1,28 +1,45 @@
 {% extends 'index.html' %}
+{% block title %}n reinas con algoritmo genético{% endblock %}
 {% block content %}
-<h1>El ejercicio de las 4 reinas</h1>
+<h1>El ejercicio de las {{ cantidad }} reinas</h1>
+<form action="/reinas_geneticas" method="get">
+    <fieldset>
+        <legend>¡Elige la cantidad de reinas!</legend>
+        <label for="n">N reinas: </label>
+        <input type="number" name="n" id="n" min="4" max="10" step="1" value="{{ cantidad }}" required>
+        <p class="importante">
+            A mayor cantidad de reinas MÁS LENTO SERÁ, (NO ES EXAGERACIÓN) <br>
+            INTERNAMENTE SE ESTÁN EJECUTANDO MILES DE ITERACIONES Y CÁLCULOS
+        </p>
+        <button type="submit">Buscarlas genéticamente</button>
+    </fieldset>
+</form>
 {% for pedazos in tableros %}
-<h2>Generación: {{ loop.index0 }}</h2>
-<section>
-    {% for cada, choque in zip(pedazos['vector'], pedazos['colisiones']) %}
-    <table>
-        <caption>Colisiones: {{ choque }}</caption>
-        {% for j in range(cantidad) %}
-        <tr>
-            {% for dato in cada %}
-            {% if dato == j %}
-            <td>👑</td>
-            {% else %}
-            <td>+</td>
-            {% endif %}
+<details>
+    <summary>
+        <h2>Generación: {{ loop.index0 }}</h2>
+    </summary>
+    <section>
+        {% for i in range(pedazos['vector'].__len__())%}
+        <table>
+            <caption>Colisiones: {{ pedazos['colisiones'][i] }}</caption>
+            {% for j in range(cantidad) %}
+            <tr>
+                {% for dato in pedazos['vector'][i] %}
+                {% if dato == j %}
+                <td>👑</td>
+                {% else %}
+                <td>+</td>
+                {% endif %}
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
+        </table>
         {% endfor %}
-    </table>
-    {% endfor %}
-</section>
+    </section>
+</details>
 {% endfor %}
-<script defer>
+<!-- <script defer>
     function revisar(lista) {
         for (let i = 0; i < lista.length; i++) {
             const element = lista[i];
@@ -33,5 +50,5 @@
         }
     }
     revisar({{ tableros | tojson }})
-</script>
+</script> -->
 {% endblock %}

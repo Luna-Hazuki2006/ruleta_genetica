@@ -6,11 +6,16 @@ fieldset {
     border-radius: 5px;
 }
 
-p span {
+nav div {
     border: 1px dashed black;
     background-color: darkgoldenrod;
     padding: 1%;
     border-radius: 10px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 td {
@@ -27,10 +32,16 @@ td, tr, table {
 }
 
 section {
-    display: flex;
+    display: flex; 
+    flex-wrap: wrap;
 }
 
 tr:nth-child(odd) td:nth-child(odd), tr:nth-child(even) td:nth-child(even) {
     background-color: black;
     color: white;
+}
+
+.importante {
+    font-family: fantasy;
+    color: red;
 }

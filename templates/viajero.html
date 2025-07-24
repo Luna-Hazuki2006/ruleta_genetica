@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>{% block titulo %}{% endblock %}</h1>
+<form id="nodear">
+    <fieldset>
+        <legend>Creación de nodos</legend>
+        <label for="nodo">Nodo: </label>
+        <input type="text" name="nodo" id="nodo" required>
+        <button type="submit">Agregar nodo</button>
+    </fieldset>
+</form>
+<ul id="nodos"></ul>
+<form id="aristear">
+    <fieldset>
+        <legend>Creación de aristas</legend>
+        <select name="primer" id="primer" required></select>
+        <select name="segundo" id="segundo" required></select>
+        <input type="number" name="arista" id="arista" required>
+        <button type="submit">Agregar arista</button>
+    </fieldset>
+</form>
+<img id="grafo" src="" alt="Supuesta imagen del grafo">
+{% block respuesta %}{% endblock %}
+{% endblock %}
