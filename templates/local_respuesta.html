@@ -1,4 +1,11 @@
 {% extends 'busqueda_local.html' %}
 {% block respuesta %}
-<img src="{{ datos['grafo'] }}" alt="Diagrama de los datos">
+{% for esto in datos %}
+{% if loop.index0 == 0 %}
+<h1>Búsqueda local total</h1>
+{% else %}
+<h1>Búsqueda local del {{ loop.index0 }}° movimiento</h1>
+{% endif %}
+<img src="{{ esto['grafo'] }}" alt="{{ esto['realidad'] }}">
+{% endfor %}
 {% endblock %}

@@ -77,8 +77,10 @@ def buscar_localidad(request : Request):
 
 @app.post('/busqueda_local')
 def mostrar_localidad(request : Request, inicio : Annotated[int, Form()], 
-                      final : Annotated[int, Form()], veces : Annotated[int, Form()]): 
-    datos = mostrar_busqueda(inicio, final, veces)
+                      final : Annotated[int, Form()], veces : Annotated[int, Form()], 
+                      inicial : Annotated[float, Form()], desplazamiento : Annotated[float, Form()], 
+                      movimientos : Annotated[int, Form()]): 
+    datos = mostrar_busqueda(inicio, final, veces, inicial, desplazamiento, movimientos)
     return templates.TemplateResponse(request, 'local_respuesta.html', {
         'datos': datos
     })
