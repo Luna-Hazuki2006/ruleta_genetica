@@ -51,7 +51,15 @@ def bicombinado(lista : list, a : int, b : int):
     # ultimo = int(ultimo, 2)
     # return penultimo, ultimo
 
-def ruletear(lista): 
+def vista_funcion(funcion : str, x : float): 
+    constantes = ['+', '-', '^', '*']
+    resultado = funcion.split('+')
+    sumado = resultado[0].split(' ')
+    sumando = resultado[1].split(' ')
+    
+
+def ruletear(lista, funcion : str):
+    if funcion == '': pass
     lista['fitness'] = [((x ** 4) - (4 * (x ** 3)) + (7 * x)) + 0.1 for x in lista['vector']]
     lista['∑fitness'] = sum(lista['fitness'])
     lista['probabilidades'] = [esto / lista['∑fitness'] for esto in lista['fitness']]
@@ -65,7 +73,7 @@ def seleccionar(lista):
         if aleatorio <= esto: break 
     return i
 
-def genetico(inicio : int, final : int, veces : int, generaciones : int): 
+def genetico(inicio : int, final : int, veces : int, generaciones : int, funcion : str): 
     matriz_total = []
     if inicio >= final: 
         print('El valor inicial no puede ser mayor al valor final')
@@ -78,7 +86,7 @@ def genetico(inicio : int, final : int, veces : int, generaciones : int):
         return matriz_total
     # matriz_total.append({'vector': [random.randrange(inicio, final) for _ in range(veces)]})
     matriz_total.append({'vector': [secrets.choice(range(inicio, final + 1)) for _ in range(veces)]})
-    lista = ruletear(matriz_total[-1])
+    lista = ruletear(matriz_total[-1], funcion)
     matriz_total[-1] = lista
     for _ in range(generaciones): 
         cuerpo = {'vector': []}
@@ -118,7 +126,7 @@ def genetico(inicio : int, final : int, veces : int, generaciones : int):
                 # pedazos['probabilidadesAcumuladas'].pop(i)
                 # pedazos['vector'].pop(i)
         # pprint(cuerpo)
-        cuerpo = ruletear(cuerpo)
+        cuerpo = ruletear(cuerpo, funcion)
         matriz_total.append(cuerpo)
     # matriz_total[-1]['']
     # pprint(matriz_total)

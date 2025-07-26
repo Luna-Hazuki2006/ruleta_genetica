@@ -27,6 +27,7 @@ class Datos_Iniciales(BaseModel):
     final : int
     veces : int
     generaciones : int
+    funcion : str = ''
 
 @app.get('/')
 def iniciar(request : Request): 
@@ -35,7 +36,7 @@ def iniciar(request : Request):
 @app.post('/')
 def mostrar(request : Request, datos : Annotated[Datos_Iniciales, Form()]): 
     pprint(datos)
-    lista = genetico(datos.inicio, datos.final, datos.veces, datos.generaciones)
+    lista = genetico(datos.inicio, datos.final, datos.veces, datos.generaciones, datos.funcion)
     return templates.TemplateResponse(request, 'respuesta.html', {
         'lista': lista
     })
