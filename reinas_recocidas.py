@@ -2,7 +2,7 @@ import math
 import random
 from colisiones import colisiones
 
-def recocer(cantidad : int = 4): 
+def recocer_reinados(cantidad : int = 4): 
     tableros = []
     inicial = list(range(cantidad))
     random.shuffle(inicial)

@@ -25,7 +25,7 @@ def bicombinado(lista : list, a : int, b : int):
     elif len(primero) < len(segundo): 
         mayor = len(segundo) - len(primero)
         primero = list('0' * mayor) + primero
-    lugar = random.randrange(1, len(primero) - 1)
+    lugar = random.randrange(1, len(primero) + 1)
     supa = primero[:lugar]
     suba = primero[lugar:]
     supb = segundo[:lugar]
@@ -52,7 +52,7 @@ def bicombinado(lista : list, a : int, b : int):
     # return penultimo, ultimo
 
 def ruletear(lista): 
-    lista['fitness'] = [esto * 2 for esto in lista['vector']]
+    lista['fitness'] = [((x ** 4) - (4 * (x ** 3)) + (7 * x)) + 0.1 for x in lista['vector']]
     lista['∑fitness'] = sum(lista['fitness'])
     lista['probabilidades'] = [esto / lista['∑fitness'] for esto in lista['fitness']]
     lista['probabilidadesAcumuladas'] = [sum(lista['probabilidades'][: i + 1]) for i, _ in enumerate(lista['probabilidades'])]
@@ -82,6 +82,7 @@ def genetico(inicio : int, final : int, veces : int, generaciones : int):
     matriz_total[-1] = lista
     for _ in range(generaciones): 
         cuerpo = {'vector': []}
+        cuerpo['padres'] = []
         # pedazos : dict[str, list] = matriz_total[-1]
         # pprint(pedazos)
         acumulado = []
@@ -93,17 +94,24 @@ def genetico(inicio : int, final : int, veces : int, generaciones : int):
             if decision > 0.1:
                 a = seleccionar(acumulado)
                 b = seleccionar(acumulado)
+                while a == b: 
+                    a = seleccionar(acumulado)
+                    b = seleccionar(acumulado)
+                alfa = [vectores[a], vectores[b]]
                 primer, segundo = bicombinado(vectores, a, b)
                 if len(cuerpo['vector']) == veces: break
+                cuerpo['padres'].append(alfa)
                 cuerpo['vector'].append(primer)
                 if len(cuerpo['vector']) == veces: break
                 cuerpo['vector'].append(segundo)
+                cuerpo['padres'].append(alfa)
             else: 
                 # pprint(pedazos['probabilidadesAcumuladas'])
                 i = seleccionar(acumulado)
                 dato = binarear(vectores, i)
                 if len(cuerpo['vector']) == veces: break
                 cuerpo['vector'].append(dato)
+                cuerpo['padres'].append([vectores[i]])
                 if len(cuerpo['vector']) == veces: break
                 # acumulado.pop(i)
                 # vectores.pop(i)

@@ -5,9 +5,29 @@
 <details>
     <summary>Generación: {{ loop.index0 }}</summary>
     <ol>
+        {% if loop.index0 == 0 %}
         {% for i in range(datos['vector'].__len__()) %}
-        <li>Valor: {{ datos['vector'][i] }}, Fitness: {{ datos['fitness'][i] | round(4) }}</li>
+        <li>
+            Valor: {{ datos['vector'][i] }}, 
+            Fitness: {{ datos['fitness'][i] | round(4) }}
+        </li>
         {% endfor %}
+        {% else %}
+        {% for i in range(datos['vector'].__len__()) %}
+        <li>
+            Valor: {{ datos['vector'][i] }}, 
+            Fitness: {{ datos['fitness'][i] | round(4) }}, 
+            {% if datos['padres'][i].__len__() == 1 %}
+            Padre del que mutó: {{ datos['padres'][i][0] }}
+            {% else %}
+            Padres del cruce: 
+            {% for padre in datos['padres'][i] %}
+            {{ padre }};
+            {% endfor %}
+            {% endif %}
+        </li>
+        {% endfor %}
+        {% endif %}
     </ol>
 </details>
 {% endfor %}

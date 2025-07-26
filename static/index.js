@@ -12,11 +12,12 @@ let aristear = document.getElementById("aristear");
 let primer = document.getElementById("primer");
 let segundo = document.getElementById("segundo");
 let grafo = document.getElementById("grafo");
+// let grafo_final = document.getElementById('grafo_final') as HTMLImageElement
 function mandar() {
     socket.send(JSON.stringify({
         nodos: nodos,
         matriz: matriz,
-        titulo: 'nolose'
+        titulo: location.pathname.split('_')[1]
     }));
 }
 function listar() {
@@ -111,5 +112,9 @@ else {
         let pasado = JSON.parse(event.data);
         console.log(pasado);
         grafo.src = pasado['grafo'];
+        // grafo.src = pasado[0]['grafo'];
+        // if (pasado.length == 2) {
+        //     grafo_final.src = pasado[1]['grafo']
+        // }
     });
 }

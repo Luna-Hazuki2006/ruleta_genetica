@@ -14,12 +14,13 @@ let aristear = document.getElementById("aristear") as HTMLFormElement;
 let primer = document.getElementById("primer") as HTMLSelectElement;
 let segundo = document.getElementById("segundo") as HTMLSelectElement;
 let grafo = document.getElementById("grafo") as HTMLImageElement;
+// let grafo_final = document.getElementById('grafo_final') as HTMLImageElement
 
 function mandar() {
     socket.send(JSON.stringify({
         nodos: nodos,
         matriz: matriz, 
-        titulo: 'nolose'
+        titulo: location.pathname.split('_')[1]
     }));
 }
 
@@ -118,6 +119,10 @@ if (!location.pathname.includes('viajero')) {
         console.log('llegó tu pedido :3');
         let pasado = JSON.parse(event.data);
         console.log(pasado);
-        grafo.src = pasado['grafo'];
+        grafo.src = pasado['grafo']
+        // grafo.src = pasado[0]['grafo'];
+        // if (pasado.length == 2) {
+        //     grafo_final.src = pasado[1]['grafo']
+        // }
     });
 }

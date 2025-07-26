@@ -71,9 +71,12 @@ def cruzar(primero : list[int], segundo : list[int]):
         if len(penultimo) == len(primero) and len(ultimo) == len(segundo): break
     return penultimo, ultimo
 
-def coronar(cantidad : int = 4): 
+def coronar(cantidad : int = 4, poblacion = '', generacion = ''): 
     generaciones = random.randrange(1000, 3000)
     poblaciones = math.factorial(cantidad)
+    if poblacion != '' and generacion != '': 
+        generaciones = int(generacion)
+        poblaciones = int(poblacion)
     tablero = []
     if cantidad < 4: 
         print('Debe haber al menos 4 reinas')
@@ -112,7 +115,7 @@ def coronar(cantidad : int = 4):
                 cuerpo['vector'].append(dato)
                 if len(cuerpo['vector']) == poblaciones: break
         cuerpo_final = llenar(cuerpo)
-        pprint(cuerpo_final)
+        # pprint(cuerpo_final)
         tablero.append(cuerpo_final)
     # pprint(tablero)
     return tablero
