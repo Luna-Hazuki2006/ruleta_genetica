@@ -17,11 +17,11 @@ def obtencion(maximo : float, inicial : list[tuple[str, str]], caminos : list[tu
     cuenta = 0
     while cuenta < maximo and (anterior == False or posterior == False):
         cuenta += 1 
-        # inicio_trozo = secrets.choice(inicial[1:-3]) if len(inicial) > 4 else secrets.choice(inicial[1:-2])
-        inicio_trozo = secrets.choice(inicial[1:-2])
+        inicio_trozo = secrets.choice(inicial[1:-3]) if len(inicial) > 4 else secrets.choice(inicial[1:-2])
+        # inicio_trozo = secrets.choice(inicial[1:-2])
         alfa = inicial.index(inicio_trozo)
-        # final_trozo = secrets.choice(inicial[alfa + 1:-2]) if len(inicial) > 4 else secrets.choice(inicial[alfa + 1:-1])
-        final_trozo = secrets.choice(inicial[alfa + 1:-1])
+        final_trozo = secrets.choice(inicial[alfa + 1:-2]) if len(inicial) > 4 else secrets.choice(inicial[alfa + 1:-1])
+        # final_trozo = secrets.choice(inicial[alfa + 1:-1])
         omega = inicial.index(final_trozo)
         trozo = inicial[alfa:omega + 1]
         trozo = [este[::-1] for este in trozo][::-1]
